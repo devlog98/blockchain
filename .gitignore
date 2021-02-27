@@ -1,1 +1,6 @@
 /Library
+.vs/blockchain/v16/.suo
+*.csproj
+/obj
+/Temp
+blockchain.sln
