@@ -1,5 +1,4 @@
 ﻿using devlog98.Block;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -116,16 +115,16 @@ namespace devlog98.Actor {
             List<PlayerBlock> checkBlocks = new List<PlayerBlock>();
             switch (moveDirection) {
                 case PlayerDirection.Right:
-                    checkBlocks = blocks.FindAll(x => x.RightBlock == null);
+                    checkBlocks = blocks.FindAll(x => x != null && x.RightBlock == null);
                     break;
                 case PlayerDirection.Left:
-                    checkBlocks = blocks.FindAll(x => x.LeftBlock == null);
+                    checkBlocks = blocks.FindAll(x => x != null && x.LeftBlock == null);
                     break;
                 case PlayerDirection.Up:
-                    checkBlocks = blocks.FindAll(x => x.UpBlock == null);
+                    checkBlocks = blocks.FindAll(x => x != null && x.UpBlock == null);
                     break;
                 case PlayerDirection.Down:
-                    checkBlocks = blocks.FindAll(x => x.DownBlock == null);
+                    checkBlocks = blocks.FindAll(x => x != null && x.DownBlock == null);
                     break;
             }
 

@@ -1,6 +1,4 @@
 ﻿using devlog98.Actor;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /*
@@ -80,6 +78,15 @@ namespace devlog98.Block {
             }
 
             return gameObject;
+        }
+
+        // collision detection
+        private void OnTriggerEnter2D(Collider2D collision) {
+            // hit spikes
+            if (collision.tag == "Spike") {
+                Destroy(collision.gameObject);
+                Destroy(this.gameObject);
+            }
         }
     }
 }
