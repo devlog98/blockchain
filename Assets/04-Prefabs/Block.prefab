@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4231583155729066372}
   - component: {fileID: 4902744949455355276}
   - component: {fileID: 4231583155729066373}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.28, y: 1.28}
+  m_Size: {x: 1.2, y: 1.2}
   m_EdgeRadius: 0
 --- !u!114 &4231583155729066373
 MonoBehaviour:
@@ -125,7 +125,3 @@ MonoBehaviour:
   leftBlock: {fileID: 0}
   upBlock: {fileID: 0}
   downBlock: {fileID: 0}
-  rayDistance: 0.96
-  rayMask:
-    serializedVersion: 2
-    m_Bits: 256

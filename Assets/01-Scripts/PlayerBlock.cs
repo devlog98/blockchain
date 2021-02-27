@@ -22,51 +22,64 @@ namespace devlog98.Block {
         public PlayerBlock UpBlock { get => upBlock; }
         public PlayerBlock DownBlock { get => downBlock; }
 
-        [Header("Collision")]
-        [SerializeField] private float rayDistance;
-        [SerializeField] private LayerMask rayMask;
+        // get block neighbours
+        public void ExecuteStart(float rayDistance, float raySpacing, LayerMask rayMask) {
+            GameObject block;
+            PlayerBlock[] blocks = new PlayerBlock[4];
+            PlayerDirection[] directions = { PlayerDirection.Right, PlayerDirection.Left, PlayerDirection.Up, PlayerDirection.Down };
 
-        public void ExecuteStart() {
-            rightBlock = CheckBlockOnDirection(PlayerDirection.Right);
-            leftBlock = CheckBlockOnDirection(PlayerDirection.Left);
-            upBlock = CheckBlockOnDirection(PlayerDirection.Up);
-            downBlock = CheckBlockOnDirection(PlayerDirection.Down);
-        }
+            for (int i = 0; i < blocks.Length; i++) {
+                block = CheckBlockOnDirection(directions[i], rayDistance, raySpacing, rayMask);
+                if (block != null) {
+                    blocks[i] = block.GetComponent<PlayerBlock>();
+                }
+            }
 
-        public void Update() {
-
+            rightBlock = blocks[0];
+            leftBlock = blocks[1];
+            upBlock = blocks[2];
+            downBlock = blocks[3];
         }
 
         // check for Player Blocks on specific direction
-        private PlayerBlock CheckBlockOnDirection(PlayerDirection direction) {
-            PlayerBlock block = null;
+        public GameObject CheckBlockOnDirection(PlayerDirection direction, float rayDistance, float raySpacing, LayerMask rayMask) {
+            GameObject gameObject = null;
 
             // get ray direction
-            Vector2 rayDirection = Vector2.zero;
-            switch(direction) {
+            Vector3 rayDirection = Vector3.zero;
+            Vector3 raySpacingDirection = Vector3.zero;
+            switch (direction) {
                 case PlayerDirection.Right:
-                    rayDirection = Vector2.right;
+                    rayDirection = Vector3.right;
+                    raySpacingDirection = Vector3.up;
                     break;
                 case PlayerDirection.Left:
-                    rayDirection = Vector2.left;
+                    rayDirection = Vector3.left;
+                    raySpacingDirection = Vector3.up;
                     break;
                 case PlayerDirection.Up:
-                    rayDirection = Vector2.up;
+                    rayDirection = Vector3.up;
+                    raySpacingDirection = Vector3.right;
                     break;
                 case PlayerDirection.Down:
-                    rayDirection = Vector2.down;
+                    rayDirection = Vector3.down;
+                    raySpacingDirection = Vector3.right;
                     break;
             }
 
             // cast ray on direction
-            RaycastHit2D[] rayHits = Physics2D.RaycastAll(transform.position, rayDirection, rayDistance, rayMask);
-            foreach(RaycastHit2D rayHit in rayHits) {
-                if (rayHit.collider != null && rayHit.collider.gameObject != this.gameObject) {
-                    block = rayHit.collider.gameObject.GetComponent<PlayerBlock>();
+            for(int i = -1; i <= 1; i++) {
+                Debug.DrawRay(transform.position + (raySpacingDirection * raySpacing * i), rayDirection * rayDistance, Color.red);
+                RaycastHit2D[] rayHits = Physics2D.RaycastAll(transform.position + (raySpacingDirection * raySpacing * i), rayDirection, rayDistance, rayMask);
+                foreach (RaycastHit2D rayHit in rayHits) {
+                    if (rayHit.collider != null && rayHit.collider.gameObject != this.gameObject) {
+                        gameObject = rayHit.collider.gameObject;
+                        break;
+                    }
                 }
             }
 
-            return block;
+            return gameObject;
         }
     }
 }
