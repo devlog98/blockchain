@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5300528128791055174}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,14 +74,6 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   isMoving: 0
   moveDirection: 0
-  collisionDistance: 1.44
-  collisionRaySpacing: 0.4
-  blockMask:
-    serializedVersion: 2
-    m_Bits: 512
-  wallMask:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!1001 &5300528127873316075
 PrefabInstance:
   m_ObjectHideFlags: 0

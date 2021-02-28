@@ -10,7 +10,10 @@ namespace devlog98.Actor {
     public enum PlayerDirection { Right, Left, Up, Down } // all possible move directions
 
     public class Player : MonoBehaviour {
-        private List<PlayerBlock> blocks = new List<PlayerBlock>();
+        public static Player instance; // singleton
+
+        public List<PlayerBlock> blocks = new List<PlayerBlock>();
+        public List<PlayerBlock> Blocks { get => blocks; }
 
         [Header("Movement")]
         [SerializeField] private Rigidbody2D rb;
@@ -20,17 +23,19 @@ namespace devlog98.Actor {
         public bool isMoving;
         public PlayerDirection moveDirection;
 
-        [Header("Collision")]
-        [SerializeField] private float collisionDistance;
-        [SerializeField] private float collisionRaySpacing;
-        [SerializeField] private LayerMask blockMask;
-        [SerializeField] private LayerMask wallMask;
+        // initialize singleton
+        private void Awake() {
+            if (instance != null && instance != this) {
+                Destroy(this.gameObject);
+            }
+            else {
+                instance = this;
+            }
+        }
 
         private void Start() {
             blocks.AddRange(GetComponentsInChildren<PlayerBlock>());
-            foreach (PlayerBlock block in blocks) {
-                block.ExecuteStart(collisionDistance, collisionRaySpacing, blockMask);
-            }
+            CheckBlockNeighbours();
 
             targetPosition = transform.position;
         }
@@ -129,7 +134,7 @@ namespace devlog98.Actor {
             }
 
             foreach(PlayerBlock checkBlock in checkBlocks) {                
-                GameObject wall = checkBlock.CheckBlockOnDirection(moveDirection, collisionDistance, collisionRaySpacing, wallMask);
+                GameObject wall = checkBlock.CheckBlockOnDirection(moveDirection);
                 if (wall != null) {
                     check = true;
                     break;
@@ -137,6 +142,20 @@ namespace devlog98.Actor {
             }
 
             return check;
+        }
+
+        // check all blocks neighbours
+        private void CheckBlockNeighbours() {
+            foreach (PlayerBlock block in blocks) {
+                block.CheckBlockNeighbours();
+            }
+        }
+
+        // destroy specific block
+        public void DestroyBlock(PlayerBlock block) {
+            blocks.Remove(block);
+            Destroy(block.gameObject);
+            CheckBlockNeighbours();
         }
     }
 }

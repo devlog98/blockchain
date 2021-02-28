@@ -8,9 +8,8 @@ using UnityEngine;
  */
 
 namespace devlog98.Block {
-    public class PlayerBlock : MonoBehaviour {
-        // reference to neighbour blocks
-        public PlayerBlock rightBlock;
+    public class PlayerBlock : MonoBehaviour {        
+        public PlayerBlock rightBlock; // reference to neighbour blocks
         public PlayerBlock leftBlock;
         public PlayerBlock upBlock;
         public PlayerBlock downBlock;
@@ -20,14 +19,20 @@ namespace devlog98.Block {
         public PlayerBlock UpBlock { get => upBlock; }
         public PlayerBlock DownBlock { get => downBlock; }
 
+        [Header("Collision")]
+        [SerializeField] private float collisionDistance;
+        [SerializeField] private float collisionRaySpacing;
+        [SerializeField] private LayerMask blockMask;
+        [SerializeField] private LayerMask wallMask;
+
         // get block neighbours
-        public void ExecuteStart(float rayDistance, float raySpacing, LayerMask rayMask) {
+        public void CheckBlockNeighbours() {
             GameObject block;
             PlayerBlock[] blocks = new PlayerBlock[4];
             PlayerDirection[] directions = { PlayerDirection.Right, PlayerDirection.Left, PlayerDirection.Up, PlayerDirection.Down };
 
             for (int i = 0; i < blocks.Length; i++) {
-                block = CheckBlockOnDirection(directions[i], rayDistance, raySpacing, rayMask);
+                block = CheckBlockOnDirection(directions[i]);
                 if (block != null) {
                     blocks[i] = block.GetComponent<PlayerBlock>();
                 }
@@ -40,7 +45,7 @@ namespace devlog98.Block {
         }
 
         // check for Player Blocks on specific direction
-        public GameObject CheckBlockOnDirection(PlayerDirection direction, float rayDistance, float raySpacing, LayerMask rayMask) {
+        public GameObject CheckBlockOnDirection(PlayerDirection direction) {
             GameObject gameObject = null;
 
             // get ray direction
@@ -67,8 +72,8 @@ namespace devlog98.Block {
 
             // cast ray on direction
             for(int i = -1; i <= 1; i++) {
-                Debug.DrawRay(transform.position + (raySpacingDirection * raySpacing * i), rayDirection * rayDistance, Color.red);
-                RaycastHit2D[] rayHits = Physics2D.RaycastAll(transform.position + (raySpacingDirection * raySpacing * i), rayDirection, rayDistance, rayMask);
+                Debug.DrawRay(transform.position + (raySpacingDirection * collisionRaySpacing * i), rayDirection * collisionDistance, Color.red);
+                RaycastHit2D[] rayHits = Physics2D.RaycastAll(transform.position + (raySpacingDirection * collisionRaySpacing * i), rayDirection, collisionDistance, blockMask);
                 foreach (RaycastHit2D rayHit in rayHits) {
                     if (rayHit.collider != null && rayHit.collider.gameObject != this.gameObject) {
                         gameObject = rayHit.collider.gameObject;
@@ -78,15 +83,6 @@ namespace devlog98.Block {
             }
 
             return gameObject;
-        }
-
-        // collision detection
-        private void OnTriggerEnter2D(Collider2D collision) {
-            // hit spikes
-            if (collision.tag == "Spike") {
-                Destroy(collision.gameObject);
-                Destroy(this.gameObject);
-            }
         }
     }
 }

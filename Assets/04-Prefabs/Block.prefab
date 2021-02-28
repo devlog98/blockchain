@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4231583155729066373}
   m_Layer: 9
   m_Name: Block
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,3 +125,11 @@ MonoBehaviour:
   leftBlock: {fileID: 0}
   upBlock: {fileID: 0}
   downBlock: {fileID: 0}
+  collisionDistance: 1.44
+  collisionRaySpacing: 0.6
+  blockMask:
+    serializedVersion: 2
+    m_Bits: 512
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 1024
