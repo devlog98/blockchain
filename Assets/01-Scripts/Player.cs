@@ -133,7 +133,7 @@ namespace devlog98.Actor {
                     break;
             }
 
-            foreach(PlayerBlock checkBlock in checkBlocks) {                
+            foreach (PlayerBlock checkBlock in checkBlocks) {
                 GameObject wall = checkBlock.CheckBlockOnDirection(moveDirection);
                 if (wall != null) {
                     check = true;
@@ -149,6 +149,31 @@ namespace devlog98.Actor {
             foreach (PlayerBlock block in blocks) {
                 block.CheckBlockNeighbours();
             }
+        }
+
+        // add specific block
+        public void AddBlock(PlayerBlock block, PlayerBlock neighbourBlock) {
+            Vector3 blockSpacing = Vector3.zero;
+            switch (moveDirection) {
+                case PlayerDirection.Right:
+                    blockSpacing = Vector3.right * moveDistance;
+                    break;
+                case PlayerDirection.Left:
+                    blockSpacing = Vector3.left * moveDistance;
+                    break;
+                case PlayerDirection.Up:
+                    blockSpacing = Vector3.up * moveDistance;
+                    break;
+                case PlayerDirection.Down:
+                    blockSpacing = Vector3.down * moveDistance;
+                    break;
+            }
+
+            block.transform.position = neighbourBlock.transform.position + blockSpacing;
+            block.transform.parent = this.transform;
+            blocks.Add(block);
+            block.gameObject.name += " (" + blocks.Count + ")";
+            CheckBlockNeighbours();
         }
 
         // destroy specific block

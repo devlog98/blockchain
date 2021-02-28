@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9639ed36821a84292e911a805dddea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blocks: []
   rb: {fileID: 5300528128791055172}
   moveDistance: 1.28
   moveSpeed: 7
