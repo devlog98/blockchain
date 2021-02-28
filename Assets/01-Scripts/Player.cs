@@ -182,7 +182,7 @@ namespace devlog98.Actor {
             }
 
             foreach (PlayerBlock checkBlock in checkBlocks) {
-                GameObject wall = checkBlock.CheckBlockOnDirection(moveDirection);
+                GameObject wall = checkBlock.CheckCollisionOnDirection(moveDirection, false);
                 if (wall != null) {
                     check = true;
                     break;

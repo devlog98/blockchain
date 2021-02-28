@@ -32,7 +32,7 @@ namespace devlog98.Block {
             PlayerDirection[] directions = { PlayerDirection.Right, PlayerDirection.Left, PlayerDirection.Up, PlayerDirection.Down };
 
             for (int i = 0; i < blocks.Length; i++) {
-                block = CheckBlockOnDirection(directions[i]);
+                block = CheckCollisionOnDirection(directions[i], true);
                 if (block != null) {
                     blocks[i] = block.GetComponent<PlayerBlock>();
                 }
@@ -45,7 +45,7 @@ namespace devlog98.Block {
         }
 
         // check for Player Blocks on specific direction
-        public GameObject CheckBlockOnDirection(PlayerDirection direction) {
+        public GameObject CheckCollisionOnDirection(PlayerDirection direction, bool blockCheck) {
             GameObject gameObject = null;
 
             // get ray direction
@@ -71,9 +71,10 @@ namespace devlog98.Block {
             }
 
             // cast ray on direction
+            LayerMask rayMask = (blockCheck) ? blockMask : wallMask;
             for(int i = -1; i <= 1; i++) {
                 Debug.DrawRay(transform.position + (raySpacingDirection * collisionRaySpacing * i), rayDirection * collisionDistance, Color.red);
-                RaycastHit2D[] rayHits = Physics2D.RaycastAll(transform.position + (raySpacingDirection * collisionRaySpacing * i), rayDirection, collisionDistance, blockMask);
+                RaycastHit2D[] rayHits = Physics2D.RaycastAll(transform.position + (raySpacingDirection * collisionRaySpacing * i), rayDirection, collisionDistance, rayMask);
                 foreach (RaycastHit2D rayHit in rayHits) {
                     if (rayHit.collider != null && rayHit.collider.gameObject != this.gameObject) {
                         gameObject = rayHit.collider.gameObject;

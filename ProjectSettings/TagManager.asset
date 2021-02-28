@@ -8,6 +8,7 @@ TagManager:
   - Block
   - Spare
   - Rotate
+  - Lock
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Spare
   - Rotate
   - PostProcess
-  - 
+  - Lock
   - 
   - 
   - 
