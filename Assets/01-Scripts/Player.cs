@@ -19,9 +19,19 @@ namespace devlog98.Actor {
         [SerializeField] private Rigidbody2D rb;
         [SerializeField] private float moveDistance;
         [SerializeField] private float moveSpeed;
-        public Vector3 targetPosition;
+        private Vector3 targetPosition;
         public bool isMoving;
-        public PlayerDirection moveDirection;
+        private PlayerDirection moveDirection;
+
+        [Header("Rotation")]
+        [SerializeField] private Rigidbody2D rbPivot;
+        [SerializeField] private Transform pivot;
+        [SerializeField] private float rotateAmount;
+        [SerializeField] private float rotateSpeed;
+        private PlayerBlock pivotBlock;
+        public Vector3 targetRotation;
+        public bool isPivoting;
+        public bool isRotating;
 
         // initialize singleton
         private void Awake() {
@@ -45,30 +55,47 @@ namespace devlog98.Actor {
             float horizontalInput = Input.GetAxisRaw("Horizontal");
             float verticalInput = Input.GetAxisRaw("Vertical");
 
-            if (!isMoving) {
-                if (horizontalInput != 0 && verticalInput != 0) {
-                    // swap between horizontal and vertical directions if Player holds both buttons
-                    if (moveDirection == PlayerDirection.Right || moveDirection == PlayerDirection.Left) {
-                        MoveOnVerticalAxis(verticalInput);
+            if (!isPivoting) {
+                if (!isMoving) {
+                    if (horizontalInput != 0 && verticalInput != 0) {
+                        // swap between horizontal and vertical directions if Player holds both buttons
+                        if (moveDirection == PlayerDirection.Right || moveDirection == PlayerDirection.Left) {
+                            MoveOnVerticalAxis(verticalInput);
+                        }
+                        else {
+                            MoveOnHorizontalAxis(horizontalInput);
+                        }
                     }
                     else {
-                        MoveOnHorizontalAxis(horizontalInput);
-                    }
-                }
-                else {
-                    // move horizontally or vertically
-                    if (horizontalInput != 0) {
-                        MoveOnHorizontalAxis(horizontalInput);
+                        // move horizontally or vertically
+                        if (horizontalInput != 0) {
+                            MoveOnHorizontalAxis(horizontalInput);
+                        }
+
+                        if (verticalInput != 0) {
+                            MoveOnVerticalAxis(verticalInput);
+                        }
                     }
 
-                    if (verticalInput != 0) {
-                        MoveOnVerticalAxis(verticalInput);
+                    // stop moving if collision is found
+                    if (MoveCollisionCheck()) {
+                        targetPosition = transform.position;
                     }
                 }
+            }
+            else {
+                if (!isMoving) {
+                    if (pivotBlock != null) {
+                        SetPivotOnBlock();
+                        pivotBlock = null;
+                    }
 
-                // stop moving if collision is found
-                if (MoveCollisionCheck()) {
-                    targetPosition = transform.position;
+                    if (!isRotating) {
+                        // rotate horizontally
+                        if (horizontalInput != 0) {
+                            RotateOnHorizontalAxis(horizontalInput);
+                        }
+                    }
                 }
             }
         }
@@ -84,8 +111,19 @@ namespace devlog98.Actor {
                 rb.MovePosition(movePosition);
                 isMoving = true;
             }
-            else {
+            else if (isMoving) {
                 isMoving = false;
+            }
+
+            if (pivot.rotation != Quaternion.Euler(targetRotation.x, targetRotation.y, targetRotation.z)) {
+                float moveRotation = Mathf.MoveTowardsAngle(pivot.eulerAngles.z, targetRotation.z, rotateSpeed * Time.deltaTime);
+
+                rbPivot.MoveRotation(moveRotation);
+                isRotating = true;
+            }
+            else if (isRotating) {
+                isRotating = false;
+                UnsetPivotFromBlock();
             }
         }
 
@@ -109,6 +147,16 @@ namespace devlog98.Actor {
             else {
                 targetPosition.y = transform.position.y - moveDistance;
                 moveDirection = PlayerDirection.Down;
+            }
+        }
+
+        // set next rotation
+        private void RotateOnHorizontalAxis(float horizontalInput) {
+            if (horizontalInput > 0) {
+                targetRotation = new Vector3(0, 0, pivot.eulerAngles.z - rotateAmount);
+            }
+            else {
+                targetRotation = new Vector3(0, 0, pivot.eulerAngles.z + rotateAmount);
             }
         }
 
@@ -169,10 +217,11 @@ namespace devlog98.Actor {
                     break;
             }
 
+            block.gameObject.name += " (" + (blocks.Count + 1) + ")";
             block.transform.position = neighbourBlock.transform.position + blockSpacing;
             block.transform.parent = this.transform;
             blocks.Add(block);
-            block.gameObject.name += " (" + blocks.Count + ")";
+
             CheckBlockNeighbours();
         }
 
@@ -181,6 +230,30 @@ namespace devlog98.Actor {
             blocks.Remove(block);
             Destroy(block.gameObject);
             CheckBlockNeighbours();
+        }
+
+        // prepare rotation based on specific block
+        public void SetPivotBlock(PlayerBlock block) {
+            pivotBlock = block;
+            isPivoting = true;
+        }
+
+        // start rotation based on specific block
+        private void SetPivotOnBlock() {
+            pivot.position = pivotBlock.transform.position;
+            foreach (PlayerBlock block in blocks) {
+                block.transform.parent = pivot;
+            }
+        }
+
+        // stop rotation based on specific block
+        private void UnsetPivotFromBlock() {
+            foreach (PlayerBlock block in blocks) {
+                block.transform.parent = this.transform;
+                block.transform.eulerAngles = Vector3.zero;
+            }
+            CheckBlockNeighbours();
+            isPivoting = false;
         }
     }
 }
