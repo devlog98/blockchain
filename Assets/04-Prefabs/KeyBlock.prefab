@@ -98,5 +98,15 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 4902744949455355276, guid: 1abbf2e054a7f9c46b7d2602f209de9b,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4902744949455355276, guid: 1abbf2e054a7f9c46b7d2602f209de9b,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1abbf2e054a7f9c46b7d2602f209de9b, type: 3}

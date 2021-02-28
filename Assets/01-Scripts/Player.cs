@@ -154,9 +154,11 @@ namespace devlog98.Actor {
         private void RotateOnHorizontalAxis(float horizontalInput) {
             if (horizontalInput > 0) {
                 targetRotation = new Vector3(0, 0, pivot.eulerAngles.z - rotateAmount);
+                moveDirection = PlayerDirection.Right;
             }
             else {
                 targetRotation = new Vector3(0, 0, pivot.eulerAngles.z + rotateAmount);
+                moveDirection = PlayerDirection.Left;
             }
         }
 
@@ -202,26 +204,75 @@ namespace devlog98.Actor {
         // add specific block
         public void AddBlock(PlayerBlock block, PlayerBlock neighbourBlock) {
             Vector3 blockSpacing = Vector3.zero;
-            switch (moveDirection) {
-                case PlayerDirection.Right:
-                    blockSpacing = Vector3.right * moveDistance;
-                    break;
-                case PlayerDirection.Left:
-                    blockSpacing = Vector3.left * moveDistance;
-                    break;
-                case PlayerDirection.Up:
-                    blockSpacing = Vector3.up * moveDistance;
-                    break;
-                case PlayerDirection.Down:
-                    blockSpacing = Vector3.down * moveDistance;
-                    break;
+            if (!isPivoting) {
+                switch (moveDirection) {
+                    case PlayerDirection.Right:
+                        blockSpacing = Vector3.right * moveDistance;
+                        break;
+                    case PlayerDirection.Left:
+                        blockSpacing = Vector3.left * moveDistance;
+                        break;
+                    case PlayerDirection.Up:
+                        blockSpacing = Vector3.up * moveDistance;
+                        break;
+                    case PlayerDirection.Down:
+                        blockSpacing = Vector3.down * moveDistance;
+                        break;
+                }
+            }
+            else {
+                float distanceX = (neighbourBlock.transform.position.x - block.transform.position.x);
+                float distanceY = (neighbourBlock.transform.position.y - block.transform.position.y);
+
+                if (distanceX < -0.64f) {
+                    // x -> -1
+                    if (distanceY > 0.64f && moveDirection == PlayerDirection.Left) {
+                        // y -> 1 down
+                        blockSpacing = neighbourBlock.transform.up * -1 * moveDistance;
+                    }
+                    else if (distanceY < -0.64f && moveDirection == PlayerDirection.Right) {
+                        // y -> -1 up
+                        blockSpacing = neighbourBlock.transform.up * moveDistance;
+                    }
+                    else {
+                        // y -> 0
+                        blockSpacing = neighbourBlock.transform.right * moveDistance;
+                    }
+                }
+                else if (distanceX > 0.64f) {
+                    // x -> 1
+                    if (distanceY > 0.64f && moveDirection == PlayerDirection.Right) {
+                        // y -> 1 down
+                        blockSpacing = neighbourBlock.transform.up * -1 * moveDistance;
+                    }
+                    else if (distanceY < -0.64f && moveDirection == PlayerDirection.Left) {
+                        // y -> -1 up
+                        blockSpacing = neighbourBlock.transform.up * moveDistance;
+                    }
+                    else {
+                        // y -> 0
+                        blockSpacing = neighbourBlock.transform.right * -1 * moveDistance;
+                    }
+                }
+                else {
+                    // x -> 0
+                    if (distanceY > 0.64f) {
+                        // y -> 1 down
+                        blockSpacing = neighbourBlock.transform.up * -1 * moveDistance;
+                    }
+                    else if (distanceY < -0.64f) {
+                        // y -> -1 up
+                        blockSpacing = neighbourBlock.transform.up * moveDistance;
+                    }
+                }
             }
 
             block.gameObject.name += " (" + (blocks.Count + 1) + ")";
             block.transform.position = neighbourBlock.transform.position + blockSpacing;
-            block.transform.parent = this.transform;
-            blocks.Add(block);
+            block.transform.rotation = neighbourBlock.transform.rotation;
+            block.transform.parent = (isPivoting) ? pivot.transform : this.transform;
 
+            blocks.Add(block);
             CheckBlockNeighbours();
         }
 
