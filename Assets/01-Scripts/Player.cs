@@ -21,9 +21,9 @@ namespace devlog98.Actor {
         [SerializeField] private Rigidbody2D rb;
         [SerializeField] private float moveDistance;
         [SerializeField] private float moveSpeed;
-        private Vector3 targetPosition;
+        public Vector3 targetPosition;
         public bool isMoving;
-        private PlayerDirection moveDirection;
+        public PlayerDirection moveDirection;
 
         [Header("Rotation")]
         [SerializeField] private Rigidbody2D rbPivot;
@@ -31,7 +31,7 @@ namespace devlog98.Actor {
         [SerializeField] private float rotateAmount;
         [SerializeField] private float rotateSpeed;
         private PlayerBlock pivotBlock;
-        public Vector3 targetRotation;
+        private Vector3 targetRotation;
         public bool isPivoting;
         public bool isRotating;
 
@@ -126,8 +126,7 @@ namespace devlog98.Actor {
                 movePosition.x = Mathf.MoveTowards(transform.position.x, targetPosition.x, moveSpeed * Time.deltaTime);
                 movePosition.y = Mathf.MoveTowards(transform.position.y, targetPosition.y, moveSpeed * Time.deltaTime);
 
-                rb.MovePosition(movePosition);
-                isMoving = true;
+                rb.MovePosition(movePosition);                
             }
             else if (isMoving) {
                 isMoving = false;
@@ -157,6 +156,7 @@ namespace devlog98.Actor {
                 targetPosition.x = transform.position.x - moveDistance;
                 moveDirection = PlayerDirection.Left;
             }
+            isMoving = true;
         }
 
         private void MoveOnVerticalAxis(float verticalInput) {
@@ -168,6 +168,7 @@ namespace devlog98.Actor {
                 targetPosition.y = transform.position.y - moveDistance;
                 moveDirection = PlayerDirection.Down;
             }
+            isMoving = true;
         }
 
         // set next rotation
