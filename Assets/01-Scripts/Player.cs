@@ -43,6 +43,7 @@ namespace devlog98.Actor {
         [SerializeField] private AudioClip spikeClip;
         [SerializeField] private AudioClip rotateClip;
         [SerializeField] private AudioClip levelCompletedClip;
+        [SerializeField] private AudioClip selectClip;
 
         // initialize singleton
         private void Awake() {
@@ -108,19 +109,21 @@ namespace devlog98.Actor {
                             }
                         }
                     }
-                }                
-
-                // reload level
-                if (Input.GetKeyDown(KeyCode.Space)) {
-                    GM.GM.instance.ReloadScene();
-                    isAlive = false;
                 }
+            }
 
-                // return to menu
-                if (Input.GetKeyDown(KeyCode.Escape)) {
-                    GM.GM.instance.LoadScene(0);
-                    isAlive = false;
-                }
+            // reload level
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                GM.GM.instance.ReloadScene();
+                AudioManager.instance.PlayOneShot(selectClip);
+                isAlive = false;
+            }
+
+            // return to menu
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                GM.GM.instance.LoadScene(0);
+                AudioManager.instance.PlayOneShot(selectClip);
+                isAlive = false;
             }
         }
 
@@ -132,7 +135,7 @@ namespace devlog98.Actor {
                 movePosition.x = Mathf.MoveTowards(transform.position.x, targetPosition.x, moveSpeed * Time.deltaTime);
                 movePosition.y = Mathf.MoveTowards(transform.position.y, targetPosition.y, moveSpeed * Time.deltaTime);
 
-                rb.MovePosition(movePosition);                
+                rb.MovePosition(movePosition);
             }
             else if (isMoving) {
                 isMoving = false;
@@ -315,7 +318,13 @@ namespace devlog98.Actor {
             ActivateExplosions(block.transform.position, color);
             blocks.Remove(block);
             Destroy(block.gameObject);
-            CheckBlockNeighbours();
+
+            if (blocks.Count > 0) {
+                CheckBlockNeighbours();
+            }
+            else {
+                isAlive = false;
+            }
         }
 
         // prepare rotation based on specific block
@@ -361,9 +370,9 @@ namespace devlog98.Actor {
 
                 if (instantiate) {
                     ParticleSystem newExplosionParticle = Instantiate(
-                        explosionParticle.gameObject, 
-                        explosionParticle.transform.position, 
-                        explosionParticle.transform.rotation, 
+                        explosionParticle.gameObject,
+                        explosionParticle.transform.position,
+                        explosionParticle.transform.rotation,
                         transform
                     ).GetComponent<ParticleSystem>();
 
@@ -379,7 +388,7 @@ namespace devlog98.Actor {
         public void LevelCompleted() {
             isAlive = false;
             AudioManager.instance.PlayOneShot(levelCompletedClip);
-            foreach (PlayerBlock block in blocks) {                
+            foreach (PlayerBlock block in blocks) {
                 ActivateExplosions(block.transform.position, block.LevelCompletedColor, true);
                 block.SetAsLevelCompleted();
             }

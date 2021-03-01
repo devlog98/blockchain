@@ -141,6 +141,7 @@ MonoBehaviour:
   spikeClip: {fileID: 8300000, guid: c12d3a41ba759614d8a673f96e574b7d, type: 3}
   rotateClip: {fileID: 8300000, guid: 5227f16f41dbd9a4e8ba5351de919314, type: 3}
   levelCompletedClip: {fileID: 8300000, guid: cc3a825abe682f34ebd3562cd53def35, type: 3}
+  selectClip: {fileID: 8300000, guid: 3ee0e3bac09c1364ea61da24e1f1224b, type: 3}
 --- !u!1 &6938363764804484344
 GameObject:
   m_ObjectHideFlags: 0
