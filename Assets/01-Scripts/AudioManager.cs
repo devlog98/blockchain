@@ -17,7 +17,6 @@ namespace devlog98.Audio {
         }
 
         public void PlayOneShot(AudioClip clip) {
-            Debug.Log("Tocou aqui!");
             source.PlayOneShot(clip);
         }
     }
