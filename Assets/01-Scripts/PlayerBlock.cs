@@ -95,6 +95,17 @@ namespace devlog98.Block {
             return gameObject;
         }
 
+        // useful to check for Key composition checking
+        public bool CheckCollisionWithBlock() {
+            Collider2D[] colliderHits = Physics2D.OverlapBoxAll(transform.position, Vector2.one * collisionRaySpacing, 0f, wallMask);
+            foreach (Collider2D colliderHit in colliderHits) {
+                if (colliderHit.gameObject != this.gameObject) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         // when Player Block becomes or stops being a pivot
         public void SetAsPivot() {
             renderer.sprite = rotateBlockSprite;

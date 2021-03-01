@@ -22,32 +22,18 @@ namespace devlog98.Level {
         public bool CheckAgainstKeyBlocks(List<PlayerBlock> blocks) {
             bool check = true;
 
-            List<PlayerBlock> checkBlocks = blocks;
-
             // false if Player has different amount of blocks
-            if (checkBlocks.Count != keyBlocks.Count) {
+            if (blocks.Count != keyBlocks.Count) {
                 check = false;
                 return check;
             }
             
+            // false if a key block is not detecting another block
             foreach (PlayerBlock keyBlock in keyBlocks) {
-                // find block with same properties
-                PlayerBlock block = checkBlocks.Find(x =>
-                    (x.RightBlock == null) == (keyBlock.RightBlock == null) &&
-                    (x.LeftBlock == null) == (keyBlock.LeftBlock == null) &&
-                    (x.UpBlock == null) == (keyBlock.UpBlock == null) &&
-                    (x.DownBlock == null) == (keyBlock.DownBlock == null)
-                );
-
-                // remove block from original list
-                if (block != null) {
-                    checkBlocks.Remove(block);
+                if (!keyBlock.CheckCollisionWithBlock()) {
+                    check = false;
+                    return check;
                 }
-            }
-
-            // if there are blocks left, Player composition is wrong
-            if (checkBlocks.Count > 0) {
-                check = false;
             }
 
             return check;
