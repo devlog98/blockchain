@@ -22,9 +22,17 @@ namespace devlog98.Level {
         public bool CheckAgainstKeyBlocks(List<PlayerBlock> blocks) {
             bool check = true;
 
-            foreach(PlayerBlock keyBlock in keyBlocks) {
+            List<PlayerBlock> checkBlocks = blocks;
+
+            // false if Player has different amount of blocks
+            if (checkBlocks.Count != keyBlocks.Count) {
+                check = false;
+                return check;
+            }
+            
+            foreach (PlayerBlock keyBlock in keyBlocks) {
                 // find block with same properties
-                PlayerBlock block = blocks.Find(x =>
+                PlayerBlock block = checkBlocks.Find(x =>
                     (x.RightBlock == null) == (keyBlock.RightBlock == null) &&
                     (x.LeftBlock == null) == (keyBlock.LeftBlock == null) &&
                     (x.UpBlock == null) == (keyBlock.UpBlock == null) &&
@@ -32,13 +40,13 @@ namespace devlog98.Level {
                 );
 
                 // remove block from original list
-                if (block != null) {                    
-                    blocks.Remove(block);
+                if (block != null) {
+                    checkBlocks.Remove(block);
                 }
             }
 
             // if there are blocks left, Player composition is wrong
-            if (blocks.Count > 0) {
+            if (checkBlocks.Count > 0) {
                 check = false;
             }
 

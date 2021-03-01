@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spareBlock: {fileID: 2204034235404481614}
+  renderer: {fileID: 25575703241803766}
 --- !u!1001 &2607539106297978315
 PrefabInstance:
   m_ObjectHideFlags: 0

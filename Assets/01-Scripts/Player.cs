@@ -33,6 +33,9 @@ namespace devlog98.Actor {
         public bool isPivoting;
         public bool isRotating;
 
+        [Header("Visuals")]
+        [SerializeField] private List<ParticleSystem> explosionParticles;
+
         // initialize singleton
         private void Awake() {
             if (instance != null && instance != this) {
@@ -85,9 +88,8 @@ namespace devlog98.Actor {
             }
             else {
                 if (!isMoving) {
-                    if (pivotBlock != null) {
+                    if (pivot.transform.position != pivotBlock.transform.position) {
                         SetPivotOnBlock();
-                        pivotBlock = null;
                     }
 
                     if (!isRotating) {
@@ -115,15 +117,17 @@ namespace devlog98.Actor {
                 isMoving = false;
             }
 
-            if (pivot.rotation != Quaternion.Euler(targetRotation.x, targetRotation.y, targetRotation.z)) {
-                float moveRotation = Mathf.MoveTowardsAngle(pivot.eulerAngles.z, targetRotation.z, rotateSpeed * Time.deltaTime);
+            if (isPivoting) {
+                if (Quaternion.Angle(pivot.rotation, Quaternion.Euler(targetRotation.x, targetRotation.y, targetRotation.z)) > 0.1f) {
+                    float moveRotation = Mathf.MoveTowardsAngle(pivot.eulerAngles.z, targetRotation.z, rotateSpeed * Time.deltaTime);
 
-                rbPivot.MoveRotation(moveRotation);
-                isRotating = true;
-            }
-            else if (isRotating) {
-                isRotating = false;
-                UnsetPivotFromBlock();
+                    rbPivot.MoveRotation(moveRotation);
+                    isRotating = true;
+                }
+                else if (isRotating) {
+                    isRotating = false;
+                    UnsetPivotFromBlock();
+                }
             }
         }
 
@@ -202,9 +206,9 @@ namespace devlog98.Actor {
         }
 
         // add specific block
-        public void AddBlock(PlayerBlock block, PlayerBlock neighbourBlock) {
+        public void AddBlock(PlayerBlock block, PlayerBlock neighbourBlock, Color color) {
             Vector3 blockSpacing = Vector3.zero;
-            if (!isPivoting) {
+            if (!isRotating) {
                 switch (moveDirection) {
                     case PlayerDirection.Right:
                         blockSpacing = Vector3.right * moveDistance;
@@ -266,26 +270,32 @@ namespace devlog98.Actor {
                     }
                 }
             }
-
+            
             block.gameObject.name += " (" + (blocks.Count + 1) + ")";
             block.transform.position = neighbourBlock.transform.position + blockSpacing;
             block.transform.rotation = neighbourBlock.transform.rotation;
-            block.transform.parent = (isPivoting) ? pivot.transform : this.transform;
+            block.transform.parent = (isRotating) ? pivot.transform : this.transform;
 
+            ActivateExplosions(block.transform.position, color);
             blocks.Add(block);
             CheckBlockNeighbours();
         }
 
         // destroy specific block
-        public void DestroyBlock(PlayerBlock block) {
+        public void DestroyBlock(PlayerBlock block, Color color) {
+            // remove block
+            ActivateExplosions(block.transform.position, color);
             blocks.Remove(block);
             Destroy(block.gameObject);
             CheckBlockNeighbours();
         }
 
         // prepare rotation based on specific block
-        public void SetPivotBlock(PlayerBlock block) {
+        public void SetPivotBlock(PlayerBlock block, Color color) {            
             pivotBlock = block;
+            pivotBlock.SetAsPivot();
+
+            ActivateExplosions(block.transform.position, color);
             isPivoting = true;
         }
 
@@ -299,12 +309,27 @@ namespace devlog98.Actor {
 
         // stop rotation based on specific block
         private void UnsetPivotFromBlock() {
+            pivotBlock.UnsetAsPivot();
+            ActivateExplosions(pivotBlock.transform.position, pivotBlock.RotateBlockColor);
+            pivotBlock = null;
+
             foreach (PlayerBlock block in blocks) {
                 block.transform.parent = this.transform;
                 block.transform.eulerAngles = Vector3.zero;
             }
+            
             CheckBlockNeighbours();
             isPivoting = false;
+        }
+
+        // play particles with color
+        private void ActivateExplosions(Vector3 position, Color color) {
+            foreach (ParticleSystem explosionParticle in explosionParticles) {
+                explosionParticle.transform.position = position;
+                ParticleSystem.MainModule main = explosionParticle.main;
+                main.startColor = color;
+                explosionParticle.Play();
+            }
         }
     }
 }

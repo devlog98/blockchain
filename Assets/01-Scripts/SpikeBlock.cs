@@ -3,11 +3,13 @@ using UnityEngine;
 
 namespace devlog98.Block {
     public class SpikeBlock : MonoBehaviour {
+        [SerializeField] private SpriteRenderer renderer;
+
         // check collision with Player Blocks
         private void OnTriggerEnter2D(Collider2D collision) {
             if (collision.tag == "Block") {
                 PlayerBlock block = collision.gameObject.GetComponent<PlayerBlock>();
-                Player.instance.DestroyBlock(block);
+                Player.instance.DestroyBlock(block, renderer.color);
                 Destroy(this.gameObject);
             }
         }

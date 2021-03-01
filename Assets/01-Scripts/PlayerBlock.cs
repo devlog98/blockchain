@@ -17,13 +17,21 @@ namespace devlog98.Block {
         public PlayerBlock RightBlock { get => rightBlock; }
         public PlayerBlock LeftBlock { get => leftBlock; }
         public PlayerBlock UpBlock { get => upBlock; }
-        public PlayerBlock DownBlock { get => downBlock; }
+        public PlayerBlock DownBlock { get => downBlock; }        
 
         [Header("Collision")]
         [SerializeField] private float collisionDistance;
         [SerializeField] private float collisionRaySpacing;
         [SerializeField] private LayerMask blockMask;
         [SerializeField] private LayerMask wallMask;
+
+        [Header("Visual")]
+        [SerializeField] private SpriteRenderer renderer;
+        [SerializeField] private Sprite defaultSprite;
+        [SerializeField] private Color defaultColor;
+        [SerializeField] private Sprite rotateBlockSprite;
+        [SerializeField] private Color rotateBlockColor;
+        public Color RotateBlockColor { get => rotateBlockColor; }
 
         // get block neighbours
         public void CheckBlockNeighbours() {
@@ -84,6 +92,17 @@ namespace devlog98.Block {
             }
 
             return gameObject;
+        }
+
+        // when Player Block becomes or stops being a pivot
+        public void SetAsPivot() {
+            renderer.sprite = rotateBlockSprite;
+            renderer.color = rotateBlockColor;
+        }
+
+        public void UnsetAsPivot() {
+            renderer.sprite = defaultSprite;
+            renderer.color = defaultColor;
         }
     }
 }
