@@ -1,4 +1,5 @@
-﻿using devlog98.Block;
+﻿using devlog98.Audio;
+using devlog98.Block;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,8 +36,13 @@ namespace devlog98.Actor {
         public bool isPivoting;
         public bool isRotating;
 
-        [Header("Visuals")]
+        [Header("Feedback")]
         [SerializeField] private List<ParticleSystem> explosionParticles;
+        [SerializeField] private AudioClip walkClip;
+        [SerializeField] private AudioClip spareClip;
+        [SerializeField] private AudioClip spikeClip;
+        [SerializeField] private AudioClip rotateClip;
+        [SerializeField] private AudioClip levelCompletedClip;
 
         // initialize singleton
         private void Awake() {
@@ -156,6 +162,7 @@ namespace devlog98.Actor {
                 targetPosition.x = transform.position.x - moveDistance;
                 moveDirection = PlayerDirection.Left;
             }
+            AudioManager.instance.PlayOneShot(walkClip);
             isMoving = true;
         }
 
@@ -168,6 +175,7 @@ namespace devlog98.Actor {
                 targetPosition.y = transform.position.y - moveDistance;
                 moveDirection = PlayerDirection.Down;
             }
+            AudioManager.instance.PlayOneShot(walkClip);
             isMoving = true;
         }
 
@@ -181,6 +189,7 @@ namespace devlog98.Actor {
                 targetRotation = new Vector3(0, 0, pivot.eulerAngles.z + rotateAmount);
                 moveDirection = PlayerDirection.Left;
             }
+            AudioManager.instance.PlayOneShot(walkClip);
         }
 
         // check if movement is possible
@@ -293,6 +302,7 @@ namespace devlog98.Actor {
             block.transform.rotation = neighbourBlock.transform.rotation;
             block.transform.parent = (isRotating) ? pivot.transform : this.transform;
 
+            AudioManager.instance.PlayOneShot(spareClip);
             ActivateExplosions(block.transform.position, color);
             blocks.Add(block);
             CheckBlockNeighbours();
@@ -301,6 +311,7 @@ namespace devlog98.Actor {
         // destroy specific block
         public void DestroyBlock(PlayerBlock block, Color color) {
             // remove block
+            AudioManager.instance.PlayOneShot(spikeClip);
             ActivateExplosions(block.transform.position, color);
             blocks.Remove(block);
             Destroy(block.gameObject);
@@ -312,6 +323,7 @@ namespace devlog98.Actor {
             pivotBlock = block;
             pivotBlock.SetAsPivot();
 
+            AudioManager.instance.PlayOneShot(rotateClip);
             ActivateExplosions(block.transform.position, color);
             isPivoting = true;
         }
@@ -327,6 +339,7 @@ namespace devlog98.Actor {
         // stop rotation based on specific block
         private void UnsetPivotFromBlock() {
             pivotBlock.UnsetAsPivot();
+            AudioManager.instance.PlayOneShot(rotateClip);
             ActivateExplosions(pivotBlock.transform.position, pivotBlock.RotateBlockColor);
             pivotBlock = null;
 
@@ -364,8 +377,9 @@ namespace devlog98.Actor {
 
         // level completed
         public void LevelCompleted() {
-            isAlive = false;            
-            foreach (PlayerBlock block in blocks) {
+            isAlive = false;
+            AudioManager.instance.PlayOneShot(levelCompletedClip);
+            foreach (PlayerBlock block in blocks) {                
                 ActivateExplosions(block.transform.position, block.LevelCompletedColor, true);
                 block.SetAsLevelCompleted();
             }

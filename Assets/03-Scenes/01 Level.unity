@@ -165,7 +165,7 @@ Transform:
   - {fileID: 2874614172653284928}
   - {fileID: 1790144989}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &241944279
 PrefabInstance:
@@ -300,7 +300,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &363568837 stripped
 MonoBehaviour:
@@ -7905,6 +7905,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1abbf2e054a7f9c46b7d2602f209de9b, type: 3}
+--- !u!1001 &2165272271867729805
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2165272272557277490, guid: 2c9bce8ec8300b740bc1160c203b63f6,
+        type: 3}
+      propertyPath: m_Name
+      value: Audio Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165272272557277519, guid: 2c9bce8ec8300b740bc1160c203b63f6,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165272272557277519, guid: 2c9bce8ec8300b740bc1160c203b63f6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165272272557277519, guid: 2c9bce8ec8300b740bc1160c203b63f6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165272272557277519, guid: 2c9bce8ec8300b740bc1160c203b63f6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165272272557277519, guid: 2c9bce8ec8300b740bc1160c203b63f6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165272272557277519, guid: 2c9bce8ec8300b740bc1160c203b63f6,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165272272557277519, guid: 2c9bce8ec8300b740bc1160c203b63f6,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165272272557277519, guid: 2c9bce8ec8300b740bc1160c203b63f6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165272272557277519, guid: 2c9bce8ec8300b740bc1160c203b63f6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165272272557277519, guid: 2c9bce8ec8300b740bc1160c203b63f6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165272272557277519, guid: 2c9bce8ec8300b740bc1160c203b63f6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2c9bce8ec8300b740bc1160c203b63f6, type: 3}
 --- !u!4 &2874614172653284928
 Transform:
   m_ObjectHideFlags: 0
@@ -8040,6 +8109,75 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!1001 &4197458589141130755
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4197458590863301122, guid: fb79fd66a03fcae40943ad9f1ae68d5a,
+        type: 3}
+      propertyPath: m_Name
+      value: Music Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197458590863301127, guid: fb79fd66a03fcae40943ad9f1ae68d5a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197458590863301127, guid: fb79fd66a03fcae40943ad9f1ae68d5a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197458590863301127, guid: fb79fd66a03fcae40943ad9f1ae68d5a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197458590863301127, guid: fb79fd66a03fcae40943ad9f1ae68d5a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197458590863301127, guid: fb79fd66a03fcae40943ad9f1ae68d5a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197458590863301127, guid: fb79fd66a03fcae40943ad9f1ae68d5a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197458590863301127, guid: fb79fd66a03fcae40943ad9f1ae68d5a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197458590863301127, guid: fb79fd66a03fcae40943ad9f1ae68d5a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197458590863301127, guid: fb79fd66a03fcae40943ad9f1ae68d5a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197458590863301127, guid: fb79fd66a03fcae40943ad9f1ae68d5a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197458590863301127, guid: fb79fd66a03fcae40943ad9f1ae68d5a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fb79fd66a03fcae40943ad9f1ae68d5a, type: 3}
 --- !u!1839735485 &5208570535161523985
 Tilemap:
   m_ObjectHideFlags: 0
