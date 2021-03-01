@@ -31,6 +31,7 @@ namespace devlog98.Block {
         [SerializeField] private Color defaultColor;
         [SerializeField] private Sprite rotateBlockSprite;
         [SerializeField] private Color rotateBlockColor;
+        [SerializeField] private Color levelCompletedColor;
         public Color RotateBlockColor { get => rotateBlockColor; }
 
         // get block neighbours
@@ -103,6 +104,11 @@ namespace devlog98.Block {
         public void UnsetAsPivot() {
             renderer.sprite = defaultSprite;
             renderer.color = defaultColor;
+        }
+
+        // when level is completed
+        public void SetAsLevelCompleted() {
+            renderer.color = levelCompletedColor;
         }
     }
 }

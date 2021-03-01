@@ -15,6 +15,8 @@ namespace devlog98.Actor {
         public List<PlayerBlock> blocks = new List<PlayerBlock>();
         public List<PlayerBlock> Blocks { get => blocks; }
 
+        private bool isAlive = true;
+
         [Header("Movement")]
         [SerializeField] private Rigidbody2D rb;
         [SerializeField] private float moveDistance;
@@ -54,48 +56,50 @@ namespace devlog98.Actor {
         }
 
         private void Update() {
-            //grabs input
-            float horizontalInput = Input.GetAxisRaw("Horizontal");
-            float verticalInput = Input.GetAxisRaw("Vertical");
+            if (isAlive) {
+                //grabs input
+                float horizontalInput = Input.GetAxisRaw("Horizontal");
+                float verticalInput = Input.GetAxisRaw("Vertical");
 
-            if (!isPivoting) {
-                if (!isMoving) {
-                    if (horizontalInput != 0 && verticalInput != 0) {
-                        // swap between horizontal and vertical directions if Player holds both buttons
-                        if (moveDirection == PlayerDirection.Right || moveDirection == PlayerDirection.Left) {
-                            MoveOnVerticalAxis(verticalInput);
+                if (!isPivoting) {
+                    if (!isMoving) {
+                        if (horizontalInput != 0 && verticalInput != 0) {
+                            // swap between horizontal and vertical directions if Player holds both buttons
+                            if (moveDirection == PlayerDirection.Right || moveDirection == PlayerDirection.Left) {
+                                MoveOnVerticalAxis(verticalInput);
+                            }
+                            else {
+                                MoveOnHorizontalAxis(horizontalInput);
+                            }
                         }
                         else {
-                            MoveOnHorizontalAxis(horizontalInput);
-                        }
-                    }
-                    else {
-                        // move horizontally or vertically
-                        if (horizontalInput != 0) {
-                            MoveOnHorizontalAxis(horizontalInput);
+                            // move horizontally or vertically
+                            if (horizontalInput != 0) {
+                                MoveOnHorizontalAxis(horizontalInput);
+                            }
+
+                            if (verticalInput != 0) {
+                                MoveOnVerticalAxis(verticalInput);
+                            }
                         }
 
-                        if (verticalInput != 0) {
-                            MoveOnVerticalAxis(verticalInput);
+                        // stop moving if collision is found
+                        if (MoveCollisionCheck()) {
+                            targetPosition = transform.position;
                         }
-                    }
-
-                    // stop moving if collision is found
-                    if (MoveCollisionCheck()) {
-                        targetPosition = transform.position;
                     }
                 }
-            }
-            else {
-                if (!isMoving) {
-                    if (pivot.transform.position != pivotBlock.transform.position) {
-                        SetPivotOnBlock();
-                    }
+                else {
+                    if (!isMoving) {
+                        if (pivot.transform.position != pivotBlock.transform.position) {
+                            SetPivotOnBlock();
+                        }
 
-                    if (!isRotating) {
-                        // rotate horizontally
-                        if (horizontalInput != 0) {
-                            RotateOnHorizontalAxis(horizontalInput);
+                        if (!isRotating) {
+                            // rotate horizontally
+                            if (horizontalInput != 0) {
+                                RotateOnHorizontalAxis(horizontalInput);
+                            }
                         }
                     }
                 }
@@ -270,7 +274,7 @@ namespace devlog98.Actor {
                     }
                 }
             }
-            
+
             block.gameObject.name += " (" + (blocks.Count + 1) + ")";
             block.transform.position = neighbourBlock.transform.position + blockSpacing;
             block.transform.rotation = neighbourBlock.transform.rotation;
@@ -291,7 +295,7 @@ namespace devlog98.Actor {
         }
 
         // prepare rotation based on specific block
-        public void SetPivotBlock(PlayerBlock block, Color color) {            
+        public void SetPivotBlock(PlayerBlock block, Color color) {
             pivotBlock = block;
             pivotBlock.SetAsPivot();
 
@@ -317,7 +321,7 @@ namespace devlog98.Actor {
                 block.transform.parent = this.transform;
                 block.transform.eulerAngles = Vector3.zero;
             }
-            
+
             CheckBlockNeighbours();
             isPivoting = false;
         }
@@ -329,6 +333,14 @@ namespace devlog98.Actor {
                 ParticleSystem.MainModule main = explosionParticle.main;
                 main.startColor = color;
                 explosionParticle.Play();
+            }
+        }
+
+        // level completed
+        public void LevelCompleted() {
+            isAlive = false;
+            foreach (PlayerBlock block in blocks) {
+                block.SetAsLevelCompleted();
             }
         }
     }
