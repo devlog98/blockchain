@@ -340,19 +340,33 @@ namespace devlog98.Actor {
         }
 
         // play particles with color
-        private void ActivateExplosions(Vector3 position, Color color) {
+        private void ActivateExplosions(Vector3 position, Color color, bool instantiate = false) {
             foreach (ParticleSystem explosionParticle in explosionParticles) {
                 explosionParticle.transform.position = position;
                 ParticleSystem.MainModule main = explosionParticle.main;
                 main.startColor = color;
-                explosionParticle.Play();
+
+                if (instantiate) {
+                    ParticleSystem newExplosionParticle = Instantiate(
+                        explosionParticle.gameObject, 
+                        explosionParticle.transform.position, 
+                        explosionParticle.transform.rotation, 
+                        transform
+                    ).GetComponent<ParticleSystem>();
+
+                    newExplosionParticle.Play();
+                }
+                else {
+                    explosionParticle.Play();
+                }
             }
         }
 
         // level completed
         public void LevelCompleted() {
-            isAlive = false;
+            isAlive = false;            
             foreach (PlayerBlock block in blocks) {
+                ActivateExplosions(block.transform.position, block.LevelCompletedColor, true);
                 block.SetAsLevelCompleted();
             }
         }

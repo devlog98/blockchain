@@ -8,14 +8,16 @@ namespace devlog98.Block {
         [Header("Lock")]
         [SerializeField] private Key key;
         [SerializeField] private UnityEvent unlockEvent;
+        private bool isLocked = true;
 
         private void OnTriggerStay2D(Collider2D collision) {
-            if (collision.tag == "Block") {
-                if (key.CheckAgainstKeyBlocks(Player.instance.Blocks)) {
-                    unlockEvent.Invoke();
-                }
-                else {
-                    Debug.Log("Errou a composição!!!");
+            if (isLocked) {
+                if (collision.tag == "Block") {
+                    if (key.CheckAgainstKeyBlocks(Player.instance.Blocks)) {
+                        unlockEvent.Invoke();
+                        Destroy(key.gameObject);
+                        isLocked = false;
+                    }
                 }
             }
         }

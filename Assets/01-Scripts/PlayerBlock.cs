@@ -32,7 +32,9 @@ namespace devlog98.Block {
         [SerializeField] private Sprite rotateBlockSprite;
         [SerializeField] private Color rotateBlockColor;
         [SerializeField] private Color levelCompletedColor;
+
         public Color RotateBlockColor { get => rotateBlockColor; }
+        public Color LevelCompletedColor { get => levelCompletedColor; }
 
         // get block neighbours
         public void CheckBlockNeighbours() {
