@@ -102,6 +102,18 @@ namespace devlog98.Actor {
                             }
                         }
                     }
+                }                
+
+                // reload level
+                if (Input.GetKeyDown(KeyCode.Space)) {
+                    GM.GM.instance.ReloadScene();
+                    isAlive = false;
+                }
+
+                // return to menu
+                if (Input.GetKeyDown(KeyCode.Escape)) {
+                    GM.GM.instance.LoadScene(0);
+                    isAlive = false;
                 }
             }
         }
