@@ -67,6 +67,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: KeyBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 4231583155729066371, guid: 1abbf2e054a7f9c46b7d2602f209de9b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231583155729066371, guid: 1abbf2e054a7f9c46b7d2602f209de9b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Lock
+      objectReference: {fileID: 0}
     - target: {fileID: 4231583155729066372, guid: 1abbf2e054a7f9c46b7d2602f209de9b,
         type: 3}
       propertyPath: m_Sprite
@@ -97,6 +107,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231583155729066373, guid: 1abbf2e054a7f9c46b7d2602f209de9b,
+        type: 3}
+      propertyPath: blockMask.m_Bits
+      value: 32768
       objectReference: {fileID: 0}
     - target: {fileID: 4902744949455355276, guid: 1abbf2e054a7f9c46b7d2602f209de9b,
         type: 3}
