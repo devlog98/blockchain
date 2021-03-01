@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 namespace devlog98.GM {
     public class GM : MonoBehaviour {
         public static GM instance; // singleton
-        private const float waitTime = .7f;
+        private const float waitTime = .5f;
 
         // initialize singleton
         private void Awake() {
@@ -24,8 +24,7 @@ namespace devlog98.GM {
 
         public void ReloadScene() {
             int sceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
-            StopAllCoroutines();
-            StartCoroutine(WaitCoroutine(sceneBuildIndex));
+            SceneManager.LoadScene(sceneBuildIndex);
         }
 
         public void Quit() {
