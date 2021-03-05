@@ -13,9 +13,10 @@ namespace devlog98.Actor {
     public class Player : MonoBehaviour {
         public static Player instance; // singleton
 
-        public List<PlayerBlock> blocks = new List<PlayerBlock>();
+        [Header("General")]
+        [SerializeField] private bool canReset = true;
+        private List<PlayerBlock> blocks = new List<PlayerBlock>();
         public List<PlayerBlock> Blocks { get => blocks; }
-
         private bool isAlive = true;
 
         [Header("Movement")]
@@ -111,19 +112,21 @@ namespace devlog98.Actor {
                     }
                 }
             }
+            
+            if (canReset) {
+                // reload level
+                if (Input.GetKeyDown(KeyCode.R)) {
+                    GM.GM.instance.ReloadScene();
+                    AudioManager.instance.PlayOneShot(selectClip);
+                    isAlive = false;
+                }
 
-            // reload level
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                GM.GM.instance.ReloadScene();
-                AudioManager.instance.PlayOneShot(selectClip);
-                isAlive = false;
-            }
-
-            // return to menu
-            if (Input.GetKeyDown(KeyCode.Escape)) {
-                GM.GM.instance.LoadScene(0);
-                AudioManager.instance.PlayOneShot(selectClip);
-                isAlive = false;
+                // return to menu
+                if (Input.GetKeyDown(KeyCode.E)) {
+                    GM.GM.instance.LoadScene(0);
+                    AudioManager.instance.PlayOneShot(selectClip);
+                    isAlive = false;
+                }
             }
         }
 
