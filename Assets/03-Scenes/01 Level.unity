@@ -8033,6 +8033,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2312700621124830826, guid: 5c9835af97bb27a4f91de04dde7f489f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2312700621124830826, guid: 5c9835af97bb27a4f91de04dde7f489f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 363568837}
+    - target: {fileID: 2312700621124830826, guid: 5c9835af97bb27a4f91de04dde7f489f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 2312700621124830826, guid: 5c9835af97bb27a4f91de04dde7f489f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021178369873167919, guid: 5c9835af97bb27a4f91de04dde7f489f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 363568837}
+    - target: {fileID: 5021178369873167919, guid: 5c9835af97bb27a4f91de04dde7f489f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReloadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021178369873167919, guid: 5c9835af97bb27a4f91de04dde7f489f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c9835af97bb27a4f91de04dde7f489f, type: 3}
 --- !u!1001 &2165272271867729805

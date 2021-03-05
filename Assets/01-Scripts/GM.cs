@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using devlog98.Audio;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,7 @@ namespace devlog98.GM {
     public class GM : MonoBehaviour {
         public static GM instance; // singleton
         private const float waitTime = .5f;
+        [SerializeField] private AudioClip selectClip;
 
         // initialize singleton
         private void Awake() {
@@ -17,17 +19,22 @@ namespace devlog98.GM {
             }
         }
 
-        public void LoadScene(int sceneBuildIndex) {
-            StopAllCoroutines();
-            StartCoroutine(WaitCoroutine(sceneBuildIndex));
-        }
-
         public void ReloadScene() {
+            AudioManager.instance.PlayOneShot(selectClip);
             int sceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(sceneBuildIndex);
         }
 
-        public void Quit() {
+        public void LoadScene(int sceneBuildIndex) {
+            if (sceneBuildIndex == 0) {
+                AudioManager.instance.PlayOneShot(selectClip);
+            }
+
+            StopAllCoroutines();
+            StartCoroutine(WaitCoroutine(sceneBuildIndex));
+        }
+
+        public void Quit() {            
             StopAllCoroutines();
             StartCoroutine(WaitCoroutine(-1));
         }

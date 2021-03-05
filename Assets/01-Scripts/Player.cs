@@ -1,5 +1,6 @@
 ﻿using devlog98.Audio;
 using devlog98.Block;
+using devlog98.InputSystem;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,8 +44,7 @@ namespace devlog98.Actor {
         [SerializeField] private AudioClip spareClip;
         [SerializeField] private AudioClip spikeClip;
         [SerializeField] private AudioClip rotateClip;
-        [SerializeField] private AudioClip levelCompletedClip;
-        [SerializeField] private AudioClip selectClip;
+        [SerializeField] private AudioClip levelCompletedClip;        
 
         // initialize singleton
         private void Awake() {
@@ -66,8 +66,9 @@ namespace devlog98.Actor {
         private void Update() {
             if (isAlive) {
                 //grabs input
-                float horizontalInput = Input.GetAxisRaw("Horizontal");
-                float verticalInput = Input.GetAxisRaw("Vertical");
+                InputManager.GetInput();
+                float horizontalInput = InputManager.GetHorizontal();
+                float verticalInput = InputManager.GetVertical();
 
                 if (!isPivoting) {
                     if (!isMoving) {
@@ -115,16 +116,14 @@ namespace devlog98.Actor {
             
             if (canReset) {
                 // reload level
-                if (Input.GetKeyDown(KeyCode.R)) {
+                if (InputManager.GetRestartDown()) {
                     GM.GM.instance.ReloadScene();
-                    AudioManager.instance.PlayOneShot(selectClip);
                     isAlive = false;
                 }
 
                 // return to menu
-                if (Input.GetKeyDown(KeyCode.E)) {
+                if (InputManager.GetExitDown()) {
                     GM.GM.instance.LoadScene(0);
-                    AudioManager.instance.PlayOneShot(selectClip);
                     isAlive = false;
                 }
             }
