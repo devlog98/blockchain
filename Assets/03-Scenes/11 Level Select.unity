@@ -3211,7 +3211,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f02dd4ac1eccf9845a6b57e4d95c7b9f, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15394,7 +15394,7 @@ PrefabInstance:
     - target: {fileID: 3081801744871626785, guid: 559d465e7998998498e74ab996c78478,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.9199995
+      value: -0.00000011920929
       objectReference: {fileID: 0}
     - target: {fileID: 3081801744871626785, guid: 559d465e7998998498e74ab996c78478,
         type: 3}
@@ -15454,7 +15454,7 @@ PrefabInstance:
     - target: {fileID: 8524962878648372265, guid: 559d465e7998998498e74ab996c78478,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.00000047683716
+      value: 1.9200001
       objectReference: {fileID: 0}
     - target: {fileID: 8524962878648372265, guid: 559d465e7998998498e74ab996c78478,
         type: 3}
@@ -16090,7 +16090,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.039215688, g: 0.039215688, b: 0.039215688, a: 1}
   m_Origin: {x: -10, y: -6, z: 0}
   m_Size: {x: 20, y: 12, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
