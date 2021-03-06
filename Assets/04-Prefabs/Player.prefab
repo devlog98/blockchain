@@ -63,6 +63,8 @@ GameObject:
   - component: {fileID: 5300528128791055175}
   - component: {fileID: 5300528128791055172}
   - component: {fileID: 5300528128791055174}
+  - component: {fileID: 4202221957631589392}
+  - component: {fileID: 8843922156839771887}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -122,26 +124,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canReset: 1
+  playerMove: {fileID: 4202221957631589392}
+  playerRotate: {fileID: 8843922156839771887}
+  explosionParticles:
+  - {fileID: 4285923254833918068}
+  - {fileID: 7977182949989412786}
+  spareClip: {fileID: 8300000, guid: c70e6faccab9f1f49b777360368eb53d, type: 3}
+  spikeClip: {fileID: 8300000, guid: c12d3a41ba759614d8a673f96e574b7d, type: 3}
+  levelCompletedClip: {fileID: 8300000, guid: cc3a825abe682f34ebd3562cd53def35, type: 3}
+--- !u!114 &4202221957631589392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5300528128791055161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a417a305502e2b4fba9cda5860d6633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   rb: {fileID: 5300528128791055172}
   moveDistance: 1.28
   moveSpeed: 7
-  targetPosition: {x: 0, y: 0, z: 0}
-  isMoving: 0
-  moveDirection: 0
+  walkClip: {fileID: 8300000, guid: 9e36299313ef58f4b81f708e7eb2fc46, type: 3}
+--- !u!114 &8843922156839771887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5300528128791055161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4ec8611ab699284287f036375dbf965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   rbPivot: {fileID: 1479569629}
   pivot: {fileID: 5220524100861579795}
   rotateAmount: 90
   rotateSpeed: 200
-  isPivoting: 0
-  isRotating: 0
-  explosionParticles:
-  - {fileID: 4285923254833918068}
-  - {fileID: 7977182949989412786}
   walkClip: {fileID: 8300000, guid: 9e36299313ef58f4b81f708e7eb2fc46, type: 3}
-  spareClip: {fileID: 8300000, guid: c70e6faccab9f1f49b777360368eb53d, type: 3}
-  spikeClip: {fileID: 8300000, guid: c12d3a41ba759614d8a673f96e574b7d, type: 3}
   rotateClip: {fileID: 8300000, guid: 5227f16f41dbd9a4e8ba5351de919314, type: 3}
-  levelCompletedClip: {fileID: 8300000, guid: cc3a825abe682f34ebd3562cd53def35, type: 3}
 --- !u!1 &6938363764804484344
 GameObject:
   m_ObjectHideFlags: 0
