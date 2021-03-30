@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 7754418186817503935}
   - component: {fileID: 4524687163133278529}
   - component: {fileID: 331389472483814702}
+  - component: {fileID: 8329894316113019595}
   m_Layer: 5
   m_Name: Reset Button
   m_TagString: Untagged
@@ -177,6 +178,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8329894316113019595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4355932038918679403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07a3a1400bcf58644abfab668d13598f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platform: 0
 --- !u!1 &7261480225061983306
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,6 +332,7 @@ GameObject:
   - component: {fileID: 5781047497498767463}
   - component: {fileID: 5848400297446884205}
   - component: {fileID: 1938178071198319004}
+  - component: {fileID: 7798756114966395398}
   m_Layer: 5
   m_Name: Exit Button
   m_TagString: Untagged
@@ -382,6 +397,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7798756114966395398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8038105197737104712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07a3a1400bcf58644abfab668d13598f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platform: 0
 --- !u!1 &9117621745589205269
 GameObject:
   m_ObjectHideFlags: 0
