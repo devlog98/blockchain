@@ -10,6 +10,7 @@ TagManager:
   - Rotate
   - Lock
   - Music
+  - PostProcess
   layers:
   - Default
   - TransparentFX

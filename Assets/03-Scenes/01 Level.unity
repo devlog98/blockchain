@@ -558,7 +558,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &898036718
 Transform:
@@ -3430,7 +3430,7 @@ PrefabInstance:
     - target: {fileID: 3081801744871626785, guid: 559d465e7998998498e74ab996c78478,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0000009536743
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3081801744871626785, guid: 559d465e7998998498e74ab996c78478,
         type: 3}
@@ -3490,7 +3490,7 @@ PrefabInstance:
     - target: {fileID: 8524962878648372265, guid: 559d465e7998998498e74ab996c78478,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0000009536743
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8524962878648372265, guid: 559d465e7998998498e74ab996c78478,
         type: 3}
@@ -4234,7 +4234,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!19719996 &8854094142288630547
 TilemapCollider2D:
