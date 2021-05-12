@@ -1,13 +1,16 @@
 ﻿using devlog98.Actor;
 using UnityEngine;
 
+/*
+ * When Player touches this block, it receives an additional block in the correspondent position
+ */
+
 namespace devlog98.Block {
-    public class SpareBlock : MonoBehaviour {
+    public class SpareBlock : BaseBlock {
         [SerializeField] private PlayerBlock spareBlock; // spare to be spawned
-        [SerializeField] private SpriteRenderer renderer;
 
         // check collision with Player Blocks
-        private void OnTriggerEnter2D(Collider2D collision) {
+        public override void OnTriggerEnter2D(Collider2D collision) {
             if (collision.tag == "Block") {
                 // spawn spare block
                 spareBlock.gameObject.SetActive(true);

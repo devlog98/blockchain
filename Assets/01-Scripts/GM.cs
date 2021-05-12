@@ -3,6 +3,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*
+ * Basic functions of loading game, going to another scene, quitting...
+ */
+
 namespace devlog98.GM {
     public class GM : MonoBehaviour {
         public static GM instance; // singleton

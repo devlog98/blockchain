@@ -1,15 +1,17 @@
 ﻿using devlog98.Actor;
 using UnityEngine;
 
-namespace devlog98.Block {
-    public class RotateBlock : MonoBehaviour {
-        [SerializeField] private SpriteRenderer renderer;
+/*
+ * When Player touches this block, it loses a block
+ */
 
+namespace devlog98.Block {
+    public class SpikeBlock : BaseBlock {
         // check collision with Player Blocks
-        private void OnTriggerEnter2D(Collider2D collision) {
+        public override void OnTriggerEnter2D(Collider2D collision) {
             if (collision.tag == "Block") {
                 PlayerBlock block = collision.gameObject.GetComponent<PlayerBlock>();
-                Player.instance.StartRotation(block, renderer.color);
+                Player.instance.DestroyBlock(block, renderer.color);
                 Destroy(this.gameObject);
             }
         }

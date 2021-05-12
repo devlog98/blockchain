@@ -2,6 +2,11 @@
 using devlog98.Block;
 using UnityEngine;
 
+/*
+ * Responsible for Player rotation
+ * Sets and unsets pivots
+ */
+
 namespace devlog98.Actor {
     public class PlayerRotate : MonoBehaviour {
         [Header("Rotation")]

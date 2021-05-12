@@ -1,7 +1,10 @@
-﻿using devlog98.Actor;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Tilemaps;
+
+/*
+ * Used to highlight specific tilemaps that function as buttons on the menu
+ */
 
 namespace devlog98.Menu {
     public class MenuButton : MonoBehaviour {

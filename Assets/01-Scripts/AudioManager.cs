@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/*
+ * Singleton responsible for playing all sound effects of the game
+ */
+
 namespace devlog98.Audio {
     public class AudioManager : MonoBehaviour {
         public static AudioManager instance; // singleton

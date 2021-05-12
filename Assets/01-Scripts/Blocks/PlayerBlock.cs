@@ -8,7 +8,7 @@ using UnityEngine;
  */
 
 namespace devlog98.Block {
-    public class PlayerBlock : MonoBehaviour {        
+    public class PlayerBlock : MonoBehaviour {
         public PlayerBlock rightBlock; // reference to neighbour blocks
         public PlayerBlock leftBlock;
         public PlayerBlock upBlock;
@@ -17,7 +17,7 @@ namespace devlog98.Block {
         public PlayerBlock RightBlock { get => rightBlock; }
         public PlayerBlock LeftBlock { get => leftBlock; }
         public PlayerBlock UpBlock { get => upBlock; }
-        public PlayerBlock DownBlock { get => downBlock; }        
+        public PlayerBlock DownBlock { get => downBlock; }
 
         [Header("Collision")]
         [SerializeField] private float collisionDistance;
@@ -36,12 +36,18 @@ namespace devlog98.Block {
         public Color RotateBlockColor { get => rotateBlockColor; }
         public Color LevelCompletedColor { get => levelCompletedColor; }
 
+        private readonly PlayerDirection[] directions = { 
+            PlayerDirection.Right, 
+            PlayerDirection.Left, 
+            PlayerDirection.Up, 
+            PlayerDirection.Down 
+        };
+
         // get block neighbours
         public void CheckBlockNeighbours() {
             GameObject block;
-            PlayerBlock[] blocks = new PlayerBlock[4];
-            PlayerDirection[] directions = { PlayerDirection.Right, PlayerDirection.Left, PlayerDirection.Up, PlayerDirection.Down };
 
+            PlayerBlock[] blocks = new PlayerBlock[4];
             for (int i = 0; i < blocks.Length; i++) {
                 block = CheckCollisionOnDirection(directions[i], true);
                 if (block != null) {
@@ -49,6 +55,7 @@ namespace devlog98.Block {
                 }
             }
 
+            // set block neighbours
             rightBlock = blocks[0];
             leftBlock = blocks[1];
             upBlock = blocks[2];
@@ -83,7 +90,7 @@ namespace devlog98.Block {
 
             // cast ray on direction
             LayerMask rayMask = (blockCheck) ? blockMask : wallMask;
-            for(int i = -1; i <= 1; i++) {
+            for (int i = -1; i <= 1; i++) {
                 Debug.DrawRay(transform.position + (raySpacingDirection * collisionRaySpacing * i), rayDirection * collisionDistance, Color.red);
                 RaycastHit2D[] rayHits = Physics2D.RaycastAll(transform.position + (raySpacingDirection * collisionRaySpacing * i), rayDirection, collisionDistance, rayMask);
                 foreach (RaycastHit2D rayHit in rayHits) {

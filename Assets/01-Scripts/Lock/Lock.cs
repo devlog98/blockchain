@@ -3,8 +3,12 @@ using devlog98.Level;
 using UnityEngine;
 using UnityEngine.Events;
 
+/*
+ * Trigger that checks key composition against Player composition
+ */
+
 namespace devlog98.Block {
-    public class LockBlock : MonoBehaviour {
+    public class Lock : MonoBehaviour {
         [Header("Lock")]
         [SerializeField] private Key key;
         [SerializeField] private UnityEvent unlockEvent;

@@ -10,8 +10,8 @@ namespace devlog98.Platforms {
         [SerializeField] private PostProcessVolume volume;
 
         private void Awake() {
-            // At least 2GB of total memory or 1GB of VRAM
-            if (SystemInfo.graphicsMemorySize >= 1024) {
+            // At least 2GB of VRAM
+            if (SystemInfo.graphicsMemorySize >= 2048) {
                 volume.enabled = true;
             }
         }
