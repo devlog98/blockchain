@@ -14,6 +14,11 @@ namespace devlog98.Platforms {
             if (SystemInfo.graphicsMemorySize >= 2048) {
                 volume.enabled = true;
             }
+
+            // Or it is WebGL version
+            #if UNITY_WEBGL
+                volume.enabled = true;
+            #endif
         }
     }
 }

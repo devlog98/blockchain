@@ -259,7 +259,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07a3a1400bcf58644abfab668d13598f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platform: 0
+  standalone: 1
+  mobile: 0
+  webGL: 1
 --- !u!1001 &170256377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1137,7 +1139,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07a3a1400bcf58644abfab668d13598f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platform: 0
+  standalone: 1
+  mobile: 0
+  webGL: 1
 --- !u!1 &898036717
 GameObject:
   m_ObjectHideFlags: 0
@@ -2991,7 +2995,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07a3a1400bcf58644abfab668d13598f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platform: 1
+  standalone: 0
+  mobile: 1
+  webGL: 0
 --- !u!1 &1050810095
 GameObject:
   m_ObjectHideFlags: 0
@@ -3079,7 +3085,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07a3a1400bcf58644abfab668d13598f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platform: 0
+  standalone: 1
+  mobile: 0
+  webGL: 1
 --- !u!4 &1123051906 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5300528128791055175, guid: 4078d853fbbf4214395cb3745aa6cc84,
@@ -3505,6 +3513,7 @@ GameObject:
   - component: {fileID: 1288446530}
   - component: {fileID: 1288446532}
   - component: {fileID: 1288446531}
+  - component: {fileID: 1288446533}
   m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
@@ -3629,6 +3638,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288446529}
   m_CullTransparentMesh: 0
+--- !u!114 &1288446533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288446529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07a3a1400bcf58644abfab668d13598f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  standalone: 1
+  mobile: 1
+  webGL: 0
 --- !u!1 &1346421321
 GameObject:
   m_ObjectHideFlags: 0
@@ -4082,6 +4106,7 @@ GameObject:
   - component: {fileID: 1621169631}
   - component: {fileID: 1621169630}
   - component: {fileID: 1621169629}
+  - component: {fileID: 1621169632}
   m_Layer: 10
   m_Name: Quit Menu
   m_TagString: Untagged
@@ -4372,6 +4397,21 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1621169632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621169627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07a3a1400bcf58644abfab668d13598f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  standalone: 1
+  mobile: 1
+  webGL: 0
 --- !u!1 &1700451157
 GameObject:
   m_ObjectHideFlags: 0
@@ -4873,7 +4913,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07a3a1400bcf58644abfab668d13598f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platform: 0
+  standalone: 1
+  mobile: 0
+  webGL: 1
 --- !u!1 &1959563059
 GameObject:
   m_ObjectHideFlags: 0
@@ -4909,7 +4951,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 19.199999, y: 10.799999}
+    oldSize: {x: 19.2, y: 10.8}
     newSize: {x: 19.2, y: 10.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -5658,7 +5700,7 @@ PrefabInstance:
     - target: {fileID: 3081801744871626785, guid: 559d465e7998998498e74ab996c78478,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000035762787
+      value: 0.009999871
       objectReference: {fileID: 0}
     - target: {fileID: 3081801744871626785, guid: 559d465e7998998498e74ab996c78478,
         type: 3}
@@ -5723,7 +5765,7 @@ PrefabInstance:
     - target: {fileID: 8524962878648372265, guid: 559d465e7998998498e74ab996c78478,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.64000034
+      value: 0.6300001
       objectReference: {fileID: 0}
     - target: {fileID: 8524962878648372265, guid: 559d465e7998998498e74ab996c78478,
         type: 3}

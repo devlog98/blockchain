@@ -5,28 +5,22 @@
  */
 
 namespace devlog98.Platforms {
-    public enum PlatformType { Standalone, Mobile}
-
     public class ShowOnPlatform : MonoBehaviour {
-        [SerializeField] private PlatformType platform;
+        [SerializeField] private bool standalone;
+        [SerializeField] private bool mobile;
+        [SerializeField] private bool webGL;
 
         private void Start() {
             #if UNITY_STANDALONE
-                if (platform == PlatformType.Standalone) {
-                    this.gameObject.SetActive(true);
-                }
-                else {
-                    this.gameObject.SetActive(false);
-                }
+                this.gameObject.SetActive(standalone);
             #endif
 
             #if UNITY_ANDROID
-                if (platform == PlatformType.Mobile) {
-                    this.gameObject.SetActive(true);
-                }
-                else {
-                    this.gameObject.SetActive(false);
-                }
+                this.gameObject.SetActive(mobile);
+            #endif
+
+            #if UNITY_WEBGL
+                this.gameObject.SetActive(webGL);
             #endif
         }
     }
